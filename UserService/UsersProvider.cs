@@ -9,7 +9,7 @@ namespace UserService
         private List<User> _repository = new List<User>();
         public UsersProvider()
         {
-
+            Console.WriteLine("UserProvider Created");
         }
         public void LoadUser(List<User> users)
         {

@@ -45,6 +45,7 @@ namespace dotnet.highloadcup.one
             {
                 var userProvider = services.BuildServiceProvider().GetService<IUserProvider>();
                 userProvider.LoadUser(new List<Common.User>());
+                Console.WriteLine("LoadFinal");
             }
             else
                 Console.WriteLine("Directory not found!");
