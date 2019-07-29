@@ -20,6 +20,8 @@ namespace LocationService
 
         public uint[] GetIdByCountryAndDistance(string country, int? toDistance)
         {
+            if (string.IsNullOrEmpty(country) && toDistance == null)
+                return new uint[0];
             IQueryable<Location> query = _repository.AsQueryable();
             if(!string.IsNullOrEmpty(country))
             {

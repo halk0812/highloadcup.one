@@ -29,7 +29,7 @@ namespace VisitService
             {
                 visits = visits.Where(n => n.Visited_at > fromDate);
             }
-            if (toDate != null)
+            if (toDate != 0)
             {
                 visits = visits.Where(n => n.Visited_at < toDate);
             }
