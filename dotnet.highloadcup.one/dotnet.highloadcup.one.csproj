@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Buffering" Version="0.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.7.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LocationService\LocationService.csproj" />
+    <ProjectReference Include="..\OptionsService\OptionsService.csproj" />
     <ProjectReference Include="..\UserService\UserService.csproj" />
+    <ProjectReference Include="..\VisitService\VisitService.csproj" />
   </ItemGroup>
 
 </Project>

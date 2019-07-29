@@ -8,5 +8,7 @@ namespace UserService
     public interface IUserProvider
     {
         void LoadUser(List<User> users);
+
+        User GetById(int id);
     }
 }

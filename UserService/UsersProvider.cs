@@ -9,11 +9,15 @@ namespace UserService
         private List<User> _repository = new List<User>();
         public UsersProvider()
         {
-            Console.WriteLine("UserProvider Created");
         }
+
+        public User GetById(int id)
+        {
+            return _repository.Find(n => n.Id == id);
+        }
+
         public void LoadUser(List<User> users)
         {
-            Console.WriteLine("Loaded User");
             _repository.AddRange(users);
         }
     }

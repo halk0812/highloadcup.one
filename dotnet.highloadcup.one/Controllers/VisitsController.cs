@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VisitService;
 
 namespace dotnet.highloadcup.one.Controllers
 {
@@ -11,10 +13,21 @@ namespace dotnet.highloadcup.one.Controllers
     [ApiController]
     public class VisitsController : ControllerBase
     {
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        private readonly IVisitProvider _visitProvider;
+
+        public VisitsController(IVisitProvider visitProvider)
         {
-            return Ok();
+            _visitProvider = visitProvider;
+        }
+        [HttpGet("{id}")]
+        public JsonResult Get(int id)
+        {
+            Visit user = _visitProvider.GetById(id);
+            if (user == null)
+            {
+                return new JsonResult(new object()) { StatusCode = 404 };
+            }
+            return new JsonResult(user);
         }
     }
 }
