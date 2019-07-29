@@ -19,7 +19,7 @@ namespace dotnet.highloadcup.one.Controllers
             _locationProvider = locationProvider;
         }
         [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        public JsonResult Get(uint id)
         {
             Location user = _locationProvider.GetById(id);
             if (user == null)

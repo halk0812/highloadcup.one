@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Responce;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,6 +10,6 @@ namespace VisitService
     {
         void LoadVisits(List<Visit> visits);
         Visit GetById(int id);
-        List<Visit> GetByUserIdWithParametrs(int userId, UInt32? fromDate, UInt32? toDate, string country, int? toDistance);
+        UserVisits GetByUserIdWithParametrs(int userId, UInt32? fromDate, UInt32? toDate, string country, int? toDistance);
     }
 }

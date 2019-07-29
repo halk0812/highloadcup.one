@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
+using Common.Responce;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserService;
@@ -40,7 +41,7 @@ namespace dotnet.highloadcup.one.Controllers
             {
                 return new JsonResult(new object()) { StatusCode = 404 };
             }
-            List<Visit> visits = _visitProvider.GetByUserIdWithParametrs(id,fromDate, toDate, country, toDistance);
+            UserVisits visits = _visitProvider.GetByUserIdWithParametrs(id,fromDate, toDate, country, toDistance);
             if (visits == null)
             {
                 return new JsonResult(new object()) { StatusCode = 404 };

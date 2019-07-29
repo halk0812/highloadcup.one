@@ -8,6 +8,6 @@ namespace LocationService
     public interface ILocationProvider
     {
         void LoadLocations(List<Location> list);
-        Location GetById(int id);
+        Location GetById(UInt32 id);
     }
 }

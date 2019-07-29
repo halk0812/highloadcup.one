@@ -12,7 +12,7 @@ namespace LocationService
 
         }
 
-        public Location GetById(int id)
+        public Location GetById(uint id)
         {
             return _repository.Find(n => n.Id == id);
         }
