@@ -9,5 +9,6 @@ namespace LocationService
     {
         void LoadLocations(List<Location> list);
         Location GetById(UInt32 id);
+        UInt32[] GetIdByCountryAndDistance(string country, int? toDistance);
     }
 }

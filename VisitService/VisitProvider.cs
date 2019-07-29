@@ -33,13 +33,10 @@ namespace VisitService
             {
                 visits = visits.Where(n => n.Visited_at < toDate);
             }
-            if (!string.IsNullOrEmpty(country))
+            uint[] arrayIds = _locationProvider.GetIdByCountryAndDistance(country, toDistance);
+            if(arrayIds.Count()>0)
             {
-
-            }
-            if (toDistance != null)
-            {
-
+                visits = visits.Where(n => arrayIds.Contains(n.Location));
             }
             UserVisits userVisits = new UserVisits();
             userVisits.Visits = visits.Select(n => new VisitDetail()
