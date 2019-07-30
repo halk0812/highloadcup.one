@@ -9,7 +9,7 @@ namespace LocationService
     public interface ILocationProvider
     {
         void LoadLocations(List<Location> list);
-        Task<Location> GetByIdAsync(UInt32 id);
-        Task<UInt32[]> GetIdByCountryAndDistanceAsync(string country, int? toDistance);
+        Location GetById(UInt32 id);
+        UInt32[] GetIdByCountryAndDistance(string country, int? toDistance);
     }
 }

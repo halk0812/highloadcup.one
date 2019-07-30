@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Threading;
 using Common;
 using LocationService;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,10 +41,12 @@ namespace dotnet.highloadcup.one
             services.AddSingleton<IOptionProvider, OptionProvider>();
             services.AddSingleton<IVisitProvider, VisitProvider>();
             services.AddSingleton<ILocationProvider, LocationProvider>();
+#if DEBUG
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
+#endif
 
         }
 
@@ -49,6 +54,7 @@ namespace dotnet.highloadcup.one
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseResponseBuffering();
+#if DEBUG
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -58,7 +64,14 @@ namespace dotnet.highloadcup.one
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+#endif
             app.UseMvc();
+            //int worker = 0;
+            //int io = 0;
+            //ThreadPool.GetAvailableThreads(out worker, out io);
+            //Console.WriteLine("Thread pool threads available at startup: ");
+            //Console.WriteLine("   Worker threads: {0:N0}", worker);
+            //Console.WriteLine("   Asynchronous I/O threads: {0:N0}", io);
             PreloadData(app.ApplicationServices);
         }
 

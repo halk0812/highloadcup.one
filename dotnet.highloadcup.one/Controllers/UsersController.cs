@@ -24,24 +24,26 @@ namespace dotnet.highloadcup.one.Controllers
             _visitProvider = visitProvider;
         }
         [HttpGet("{id}")]
-        public async Task<JsonResult> Get(int id)
+        public JsonResult Get(int id)
         {
-            User user = await _userProvider.GetByIdAsync(id);
-            if (user == null)
+
+            User user = _userProvider.GetById(id);
+            if (user.Id == 0)
             {
                 return new JsonResult(new object()) { StatusCode = 404 };
             }
             return new JsonResult(user);
+
         }
         [HttpGet("{id}/visits")]
-        public async Task<JsonResult> Get(int id, [FromQuery] UInt32? fromDate, [FromQuery] UInt32 toDate, [FromQuery] string country, [FromQuery] int? toDistance)
+        public JsonResult Get(int id, [FromQuery] UInt32? fromDate, [FromQuery] UInt32 toDate, [FromQuery] string country, [FromQuery] int? toDistance)
         {
-            User user = await _userProvider.GetByIdAsync(id);
-            if (user == null)
+            User user = _userProvider.GetById(id);
+            if (user.Id == 0)
             {
                 return new JsonResult(new object()) { StatusCode = 404 };
             }
-            UserVisits visits = await _visitProvider.GetByUserIdWithParametrsAsync(id,fromDate, toDate, country, toDistance);
+            UserVisits visits = _visitProvider.GetByUserIdWithParametrs(id, fromDate, toDate, country, toDistance);
             if (visits == null)
             {
                 return new JsonResult(new object()) { StatusCode = 404 };

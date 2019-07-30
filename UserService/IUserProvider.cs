@@ -10,6 +10,6 @@ namespace UserService
     {
         void LoadUser(List<User> users);
 
-        Task<User> GetByIdAsync(int id);
+        User GetById(int id);
     }
 }

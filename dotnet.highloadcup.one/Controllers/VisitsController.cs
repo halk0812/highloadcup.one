@@ -20,14 +20,16 @@ namespace dotnet.highloadcup.one.Controllers
             _visitProvider = visitProvider;
         }
         [HttpGet("{id}")]
-        public async Task<JsonResult> Get(int id)
+        public JsonResult Get(int id)
         {
-            Visit user = await _visitProvider.GetByIdAsync(id);
-            if (user == null)
-            {
-                return new JsonResult(new object()) { StatusCode = 404 };
-            }
-            return new JsonResult(user);
+           
+                Visit user = _visitProvider.GetById(id);
+                if (user.Id == 0)
+                {
+                    return new JsonResult(new object()) { StatusCode = 404 };
+                }
+                return new JsonResult(user);
+          
         }
     }
 }
