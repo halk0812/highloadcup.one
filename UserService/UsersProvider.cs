@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common;
 
 namespace UserService
@@ -11,9 +12,9 @@ namespace UserService
         {
         }
 
-        public User GetById(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
-            return _repository.Find(n => n.Id == id);
+            return await Task.Run(()=>_repository.Find(n => n.Id == id));
         }
 
         public void LoadUser(List<User> users)

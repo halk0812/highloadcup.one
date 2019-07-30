@@ -19,9 +19,9 @@ namespace dotnet.highloadcup.one.Controllers
             _locationProvider = locationProvider;
         }
         [HttpGet("{id}")]
-        public JsonResult Get(uint id)
+        public async Task<JsonResult> Get(uint id)
         {
-            Location user = _locationProvider.GetById(id);
+            Location user = await _locationProvider.GetByIdAsync(id);
             if (user == null)
             {
                 return new JsonResult(new object()) { StatusCode = 404 };

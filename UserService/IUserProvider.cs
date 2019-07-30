@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace UserService
 {
@@ -9,6 +10,6 @@ namespace UserService
     {
         void LoadUser(List<User> users);
 
-        User GetById(int id);
+        Task<User> GetByIdAsync(int id);
     }
 }

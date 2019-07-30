@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Common;
 
 namespace LocationService
@@ -13,25 +14,28 @@ namespace LocationService
 
         }
 
-        public Location GetById(uint id)
+        public async Task<Location> GetByIdAsync(uint id)
         {
-            return _repository.Find(n => n.Id == id);
+            return await Task.Run(()=>_repository.Find(n => n.Id == id));
         }
 
-        public uint[] GetIdByCountryAndDistance(string country, int? toDistance)
+        public async Task<uint[]> GetIdByCountryAndDistanceAsync(string country, int? toDistance)
         {
-            if (string.IsNullOrEmpty(country) && toDistance == null)
-                return new uint[0];
-            IQueryable<Location> query = _repository.AsQueryable();
-            if(!string.IsNullOrEmpty(country))
+            return await Task.Run(() =>
             {
-                query = query.Where(n => n.Country.ToLower() == country.ToLower());
-            }
-            if(toDistance!=null)
-            {
-                query = query.Where(n => n.Distance < toDistance);
-            }
-            return query.Select(m => m.Id).ToArray();
+                if (string.IsNullOrEmpty(country) && toDistance == null)
+                    return new uint[0];
+                IQueryable<Location> query = _repository.AsQueryable();
+                if (!string.IsNullOrEmpty(country))
+                {
+                    query = query.Where(n => n.Country.ToLower() == country.ToLower());
+                }
+                if (toDistance != null)
+                {
+                    query = query.Where(n => n.Distance < toDistance);
+                }
+                return query.Select(m => m.Id).ToArray();
+            });
         }
 
         public void LoadLocations(List<Location> list)
